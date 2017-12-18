@@ -1,0 +1,14 @@
+.btn-fetch {
+  height: 100%;
+  min-height: 100%;
+  transition: unset;
+}
+.btn-fetch.fetching {
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: .8rem;
+  .loader {
+    position: relative;
+    top: 2px;
+  }
+}

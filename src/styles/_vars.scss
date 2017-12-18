@@ -1,0 +1,33 @@
+// colors
+
+// primary text color
+$primary-color: #000000;
+// text active color;
+$secondary-color: hsl(0, 0%, 68%);
+// white / light text
+$light-color: #fff;
+// dark background
+$primary-dark: #3A444D;
+// lighter dark color
+$ligter-dark: lighten($primary-dark, 10%);
+// lighter dark color alpha
+$ligter-dark-a: transparentize($ligter-dark, 0.7);
+// darker background
+$secondary-dark: darken($primary-dark, 10%);
+// darkest background
+$third-dark: darken($secondary-dark, 10%);
+// red
+$red: hsl(15, 83%, 61%);
+// green
+$green: hsl(101, 84%, 71%);
+
+// heights
+
+// select / dropdown height
+$select-height: 30px;
+
+// chart height
+$chart-height: 400px;
+
+// orderbook height
+$orderbook-height: $chart-height;

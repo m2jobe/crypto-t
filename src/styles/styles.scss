@@ -1,0 +1,36 @@
+// import global variables to override spectre vars
+@import 'vars';
+
+// import spectre css
+@import '../../node_modules/spectre.css/src/spectre';
+@import '../../node_modules/spectre.css/src/spectre-icons';
+
+// override spectre definitions
+@import 'global';
+@import 'select';
+@import 'granularity';
+@import 'background';
+@import 'fetch-button';
+@import 'ticker';
+@import 'navbar';
+@import 'position';
+@import 'logo';
+@import 'slider';
+@import 'dropdown';
+@import 'chart';
+@import 'orderbook';
+@import 'connected-glypth';
+@import 'loading-message';
+@import 'container';
+@import 'depth-chart';
+@import 'script-list';
+@import 'flex';
+@import 'text-area';
+@import 'orders-list';
+@import 'borders';
+@import 'text-colors';
+@import 'buttons';
+@import 'modal';
+@import 'fonts';
+@import 'colors';
+@import 'scroll';

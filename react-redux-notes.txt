@@ -1,0 +1,445 @@
+React:
+
+  props.children
+    - Everything in the inner JSX of a user defined Component is passed as props children to the user defined Component
+    - This allows for rendering of nested components
+
+
+  props vs state
+    - State should contain the minimum amount of information necessary to render all component/s
+    - State/s is controlled / owned by the minimum number of components
+    - The state can be passed to child components as props
+    - For a child component to change the state, it must call a method passed to it by the parent component which defines how the state should change given a certain action
+    - props are immutable
+    - state is mutable in vanilla React, it can be changed by a method in a component. Components have their own separate states.
+    - In Redux state should be treated as immutable, to change state a new state is created by dispatching an action which defines how the new state should look based on the old state. This is similar to how the .reduce method works. The methods which create a new state given an old state and an action are called reducers because of this.
+    - Components which do not contain methods to change state are dumb components and are highly reusable. They only need props to render. Action dispatchers can be passed to them the but the dispatch method is implemented by a parent component which is connected to Redux.
+    - Figuring out what component should be responsible for state is v v important.
+    - If some props are not required you can define defaultProps for the component
+
+    Example for, not sure if best practice?:
+      props -> Component -> Component has default props -> Component.state is initialized by props -> Component elements rendered from state? (why not render from props, why state?)
+      Using state to render the component because this component is changing its own state to do animations. You could not use props for the purpose because props are immutable.
+      So I guess use state to render a component if the state of the component is expected to change, and you can use props if the state of the component will no change.
+      So I guess the example above is for a 'smart' component, not a dumb component.
+
+
+  style prop:
+    - style={ some psuedoCSS object }, style names become camel case: text-align => textAlign
+
+
+  PropTypes:
+    - propTypes have to be defined outside of the component class or function
+
+
+  setState:
+    setState has a built in way pass in previous state: setState(prevState) "The prevState comes from the setState api: https://facebook.github.io/react/docs/react-component.html"
+
+
+  React router:
+    - React router is dope as fuck
+    - Defines what component should load given a route
+    - These components are commonly separated out from regular components and called containers, because they are the top level definition of an entire page, usually.
+    - Has some nice tools like applying a certain style to active nav links. Doesn't work on it's own with redux.
+    - Wraps the entire app so after you set it up you wont have to mess with it much
+
+
+  Webpack:
+    - Also dope as fuck
+    - Minifies / mangles / transpiles all the different flavors of JS with babel so your app can be bundled into a single file your browser will understand.
+    - Has a nifty express server to host your app with hot reloading for development
+    - Does a lot of other stuff I haven't played with, like defining custom aliases so you can shorten your require / import statements.
+    - Also does some nifty stuff with user defined css.
+
+
+  Favors composition over inheritance
+    - inheritance (what are) vs composition (what do)
+    - Inheritance is cool in some cases, but can be too strict in others.
+    - In the loosey goosey land of JS inheritance seems to be too strict a structure to write code in and can make re-using classes overly complex and actually require more code to get the job done.
+    - Composition is nice becuase it means you write stuff as abstract as possible, so in a sense there is no strict structure for how to implement a thing, so each thing you write is as stand-alone as possible.
+    - You can get pretty crazy with composition and define "non-ui" things as components
+
+  Forms
+    - Control your forms fam.
+    - But be weary of costly re-renders on every keystroke, even if the DOM doesn't need updating outside of the form, re-rendering the virtual DOM can still be costly.
+
+
+  Presentational and Container Components:
+    - Presentational ~ Dumb
+      - Written as functional components usually
+    - Container ~ Smart (Container of dumb)
+      - Never have their own styles, compose the Presentational components
+      - Almost always stateful + handle state for the dumb components
+      - Call actions and pass as callbacks to dumb
+      - Usually generated with/from HOCs
+
+Redux:
+
+  - Simple vs complex?
+  - Every state change can be logged
+  - State represented as object / array / primitive
+    {
+      todos: []
+      filter: 'string'
+    }
+
+    or [
+      {}
+      {}
+      {}
+    ]
+
+    or
+
+    1
+
+  - Everything that changes, data and UI state, is contained in a single state / state tree
+  - State tree is read-only
+  - Every change to state must happen through an action
+  - All actions must have type property, use string
+  - UI as a pure function of the application state
+  - State mutations must be pure function e.g. reducers.
+
+
+CSS:
+
+  - width and height as percentages is relative to the containing box
+  - with and height have prepend min- max- attributes to set min and max width
+  - overflow property for how to handle when content is too large for box
+    - hidden - hide the shit
+    - scroll - allow to scroll to show the shit
+  - position: absolute will float the element
+  - float: will right - left justify the position
+  - media queries to define separate styles for screen width, screen resolution, orientation(portrait, landscape) . -> same site, specific layout for mobile and desktop
+      - for OR conditions use a comma separated list of condition
+  - nested class selector:  .outer-class .inner-class {rules}
+
+
+Tutorials Point React Notes:
+
+    Intro:
+      - JSX - syntax sugar for inline markdown / .createComponent
+      - Unidirectional data flow is preferred with Flux
+      - Uses virtual DOM
+      - Can be used on client side and server side
+      - Can be used with other frameworks
+      - Only concerned with the view layer of the app
+
+    Dev setup:
+      - Need Node / NPM to develop it
+      - NPM init
+      - Install babel
+      - App contained in dir structure
+      - Install Webpack
+      - Install other deps
+      - Setup minimum set of files, index.html, main.js, App.js(x), webpack.config.js
+      - Setup webpack for devserver, transpiling, hot reloading
+      - Setup index html with root div element and script tag, if webpack wont do that for you
+
+    JSX
+      - Type-safe-ish, errors thrown by lib during comp.
+      - Component can only render one element at a time, other elems must be wrapped(in a div)
+      - Can define custom attributes
+      - Stuff in curly braces interpreted as regular JS
+      - Can pass stlye object as a attribute / prop
+      - Comments can be written inside curly braces
+      - custom comp. must have Uppercase first letter
+      - regular html components are lowercase like normal html
+      - Some html attributes have different names in react. for -> htmlFor, class -> className
+
+    Lifecycle methods, only available for class components:
+      - componentWillMount: exec before rendering
+      - componentDidMount: call AJAX and state updates here at the earliest.
+      - componentWillReceiveProps: called when props are updated but before a new re-render
+      - shouldComponentUpdate: can have custom logic here to skip an update / DOM re-redner
+      - componentWillUpdate: called before rendering
+      - componentDidUpdate: called after rendering
+      - componentWillUnmout: called before the component is unmounted from the DOM
+
+    Keys:
+      - put unique key attrib vales on li's
+      - can even be put on repeated components / elems of same type at same level to distingish between them
+
+
+teropa.info full state tutorial (abandoned, super out of date)
+
+  Intro:
+    - First step of designing redux app can be defining state object/array structure
+    - In Redux state is stored in a single state tree
+      - In reg. React components can have their own isolated states
+    - Can think about state isolated from behavior
+    - Think about initial state(s, after login what is state)
+  Setup
+    - mocha is test framework
+    - chai is assertion library
+    - enable babel language support by adding babel section in package.json with "presets": [array of JS language types]
+    - mocha has a --watch option to re-run tests after source file changes
+    - to run tests with immutable must install chai-immutable and --require it in the mocha test command
+    - state not just tree, but immutable tree
+    - Objects from the immutable package return new objects
+    - immutable has its own set of immutable data structures with their own APIs and I am not convinced it is a lib worth using.
+    - A way to future proof reducers is to always return a new state formed from the previous state, don't create an entirely new state and throw out the rest
+
+  Actions and Reducers:
+    - Actions always have a type by convention so you can pass it to a switch statement
+    - Update state at the smallest possible scale, the deepest branch of the tree / smallest subtree
+      - Pass minimal state to the reducer, reducer returns new minimal state
+      - The main reducer function only hands parts of the state to lower-level reducer functions.
+
+  Redux Store:
+
+  socket.io
+    - Websocket over http
+
+  Broadcasting state from a redux server:
+    - Can emit a socket.io event to all connected clients
+    - Trigged by way of subscription to a redux store
+    - Pass store to the server, then pass a callback to the store which will be called for every state change
+        store.subscribe(
+          () => io.emit('state', store.getState().toJS())
+        )
+    - In larger apps you would only want to send minimal data, not the entire state.
+    - When clients connect they should immediately get the current state to init the FE app.
+      - Do that by listening for connect() events on the server, then emit the current state on every connect
+    - When clients do an action that should update the state, the acton should be passed to the server, and dispatched to the reducer
+    - Current is insecure, read this http://vertx.io/docs/vertx-web/java/#_securing_the_bridge, also plug in auth logic here.
+    - Test first with hot reloading of UI isnt the way to go
+
+
+- Redux Read Me
+  Motivation:
+    - SPAs require a fuck ton of state
+  Core Concepts:
+    - To change state must dispatch an action
+    - Actions contain a type, and a description of how the state should change.
+    - Reducers get passed the action and the state and return the new state.
+    - actions and state passed into a big switch
+    - the switch routes the state and action to the correct reducer
+    - The reducers can be split into functions that mutate* the smallest possible part of the state tree
+    - All reducers can be combined into a single reducer, all reducers get passed the action, if the action is not relevant to a reducer the reducer should return the state it was given
+
+        function todoApp(state = {}, action) {
+          // return a sum of the sub tress of the single state tree
+          // each subtree has its own reducer
+          // pass only the relevant sub-tree of state to each reducer
+          // pass the action to both reducers, if the action is not relevant for a reducer the reducer should return the state it was given
+          return {
+            // pass partial state to this reducer
+            todos: todos(state.todos, action),
+            // pass partial state to this reducer
+            visibilityFilter: visibilityFilter(state.visibilityFilter, action)
+          }
+        }
+
+  Three Principles
+    - Single source of truth in a single state tree
+    - State is read only, to change current state an action must be dispatched
+    - Changes are made with pure function -> reducers
+
+  Actions:
+
+    - Actions are payload of information to be sent to the store
+    - Actions are sent to the store via the store.dispatch() method
+    - Declare action types as constants like ADD_TODO = 'ADD_TODO'
+    - type is the thing happening, the rest explains how to change the state
+      - Can be similar to a SQL query, send the minimum amount of info to describe the desired change
+
+        {
+          // We want to toggle a todo
+          type: TOGGLE_TODO,
+          // where index is 5
+          index: 5
+        }
+    - Action Creators:
+      - Function that creates an action
+      - One action creator per action type
+      - Maps* a payload to an action type
+      - In redux action creator do not trigger the dispatch
+
+        Traditional Flux:
+
+          addTodoWithDispatch(() => {
+            const action= {}
+            dispatch(action)
+          })
+
+        Redux:
+
+          dispatch(addTodo(text))
+
+                OR to call directly like in traditional Flux
+
+          const boundAddTodo = text => dispatch(addTodo(text))
+            boundAddTodo(text)
+
+      - Can call dispatch directly using store.dispatch()
+      - with react-redux you can use connect() HOC on the react component class which contains the action creator methods
+        - used wit the bindActionCreators() method to make this work, this automacgically calls dispatch method for all action creators
+
+
+  Reducers:
+    - Actions describe that something happened, but to decide how the state should change in response to that action is the responsibility of reducers
+    - Designing the state shape:
+      - What is the minimal representation of the apps state?
+      - Usually will need to keep data (list of todos) and UI state (active todo filter). Best to keep both separate
+      - Avoid nesting the tree, keep is as shallow as possible
+
+        "Keep every entity in an object stored with an ID as a key, and use IDs to reference it from other entities, or lists"
+        https://github.com/paularmstrong/normalizr
+
+    - Handling actions
+      - Never do these in reducers:
+        - Mutate its arguments
+        - Perform side effects like API calls and routing transitions
+        - Call non-pure functions, e.g. Date.now() or Math.random()
+      - Initialize undefined state
+          function reducer(state = initalState, action) { .. }
+      - Common design of a reducer
+
+          With Object.assign()
+
+            // Copy enumerable properties from sources to a target object {}
+
+            Object.assign(target, ...sources)
+
+            // Create new state object {}, copy all contents of state, update visibilityFilter value in the new state
+            // Sources later in the function params will overwrite the sources passed earlier in the new object
+
+            return Object.assign({}, state, { visibilityFilter: action.filter })
+
+          With spread operator { ... }
+
+            return { ...state, visibilityFilter: action.filter }
+
+      - splitting up reducers and passing them only a slice of the state is called reducer composition
+
+      Object destructuring / destructuring assignment:
+
+        // Take SHOW_ALL from VisibilityFilters and give it a same name variable
+        const { SHOW_ALL } = VisibilityFilters
+
+      - combineReducers
+        match the method name with the key name and do
+
+          const todoApp = combineReducers({
+            // works because of import / export syntax https://github.com/reactjs/redux/issues/428#issuecomment-129223274
+            // this is the state key, and also the name of the function which handles that slice of state
+            visibilityFilter,
+            // this is the state key, and also the name of the function which handles that slice of state
+            todos
+          })
+
+  Store:
+    - Holds application state
+    - Common methods
+      - access state with getState()
+      - dispatch an action with dispatch(action)
+      - pass a callback to subscribe to all state changes with subscribe(callback() / listener)
+      - to unsubscribe the subscribe method returns an unsubscribe method
+    - To create a store
+      let store = createStore(reducers)
+      let store = createStore(reduers, initalState)
+
+  Usage with React:
+
+    - Declare presentational components as functional components
+
+        const Todo = ({ prop1, prop2, prop3}) => (
+          <div>
+          </div>
+        )
+
+        Todo.propTypes = {
+          onClick: PropTypes.func.isRequired,
+          completed: PropTypes.bool.isRequired,
+          text: PropTypes.string.isRequired
+        }
+
+    - A container components is a React class with store.subscribe()
+    - react-redux has a built in HOC called connect()
+    - connect needs a method called mapStateToProps()
+      - this filters the redux state to a map of props the componenet needs
+    - connect needs a method called mapDispatchToProps()
+      - defines custom props which define methods to dispatch actions
+      - the prop method calls the dispatch method with the action
+    - functional components can be declared with passing in  ( { dispatch }) and call the dispatch method with an action, if the functional component is wrapped by the connect HOC
+    - Wrapping your app in <Provider store={store}> makes it so all container components have access to the store as a global variable
+
+
+Advanced:
+  Async actions:
+    - For an API request there are typically three types of actions
+      - Begin request action
+      - Request was successful action
+      - Request failed action
+    - A dedicated status field can be used in the actions:
+
+        { type: 'FETCH_POSTS' }
+        { type: 'FETCH_POSTS', status: 'error', error: 'Oops' }
+        { type: 'FETCH_POSTS', status: 'success', response: { ... } }
+
+        OR as multiple action types:
+
+        { type: 'FETCH_POSTS_REQUEST' }
+        { type: 'FETCH_POSTS_FAILURE', error: 'Oops' }
+        { type: 'FETCH_POSTS_SUCCESS', response: { ... } }
+
+    - If using multiple action types, use https://github.com/acdlite/redux-actions
+    - Action type: string describing the action
+    - Action creator, maps the acton type to relevant data
+    - The result of an action creator is passed to a reducer
+    - One set of actions for user interaction, one set of actions for network requests
+      - This is useful because you may want to do network actions outside of user interaction
+    - Can leave all data in the state tree unless there is tons of data
+      - switching between charts, should get rid of data probably. Wouldn't be a bad exercise anyway
+    - For each group of data have additional keys for
+      - isFetching
+      - didInvalidate
+      - lastUpdated
+      - data itself
+      - fetchedPageCount
+      - nextPageUrl
+    - For complex api responses https://github.com/paularmstrong/normalizr can be used to map to a simpler schema
+    - Redux thunk middelware for sync -> async action creators https://github.com/gaearon/redux-thunk
+      - Allows an action creator to return a function instead of an object https://en.wikipedia.org/wiki/Thunk
+    - When an action creator returns a function it will be executed by Thunk middleware
+    - Create special Thunk action creators
+      - Thunk action -> middelware (execute async process) ->  (.then()?)execute nested function(.then()?) -> dispatch another action -> changes state
+    - Execute a cascade of async operations, each level can dispatch a separate action to keep the state updated with the current state of the overall async process
+Left off @ http://redux.js.org/docs/advanced/AsyncActions.html
+
+
+  Redux thunk notes:
+      - Write action creators that return functions, normally action creators always return objects
+
+      Example:
+
+        export function errorAfterFiveSeconds() {
+          return (dispatch) => {
+              setTimeout(() => {
+                  // This function is able to dispatch other action creators
+                  dispatch(itemsHasErrored(true));
+              }, 5000);
+          };
+        }
+
+        errorAfterFiveSeconrds returns
+        a method which has dispatch in its scope
+        inside of this method you can do asynchronous things, which call the dispatch with a regular action object on resolve
+
+        TL;DR wrap async methods in
+        (
+          dispatch => {
+            thing.then((stuff) => {
+              dispatch(stuff)
+            }
+          }
+        )
+
+
+      - Inside of createStore() add applyMiddleware(thunk)
+      - So just wrap the internals of your api methods in dispatch arrow function
+
+  SCSS:
+
+    - declare a variable by prefixing $ and suffix :

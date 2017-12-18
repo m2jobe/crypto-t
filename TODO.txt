@@ -1,0 +1,38 @@
+
+General:
+  Remove any container styling
+  Use immutable for everything.
+
+Bugs:
+  CircleCI deploy breaks regenerator runtime / technicalindicators lib.
+
+Unit tests:
+  look into different fetching lib that wont fail tests
+
+Code quality:
+  Unit tests, general -> specific
+  PropTypes - container children
+  Take advantage of map state to props. Should do minimum data transformation within components.
+
+Scripting:
+
+  Backtest neural net?
+  http://karpathy.github.io/neuralnets/
+
+Indicators:
+
+  valueIds -> object with chart type [line, column]
+  use nextValue from technicalindicators on every ws data and run script?
+    on ws chat will receive props
+      dispatch preCalculateInds({time: , o:, h:, l:, c: })
+        preCalculateInds will get [...product.data, { ...newWSdata }]
+          calcaulateInds with preData
+          add Ind data to state
+      Then
+        dispatch action to run script
+
+General API:
+  Queue promises and burst at 6 per second.
+
+Styling:
+  add nav buttons to quickly scroll to main components

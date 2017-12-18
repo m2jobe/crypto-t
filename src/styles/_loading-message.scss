@@ -1,0 +1,14 @@
+.loading-message {
+  position: relative;
+  .spinner {
+    position: absolute;
+    left: 46.66667%;
+    top: 200px;
+  }
+  .message{
+    padding: 30px;
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: bold;
+  }
+}

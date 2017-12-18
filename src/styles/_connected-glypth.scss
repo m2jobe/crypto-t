@@ -1,0 +1,28 @@
+.connected-glyph {
+  margin-left: auto;
+  position: relative;
+  width: 130px;
+  height: 15px;
+
+  span {
+    position: absolute;
+    z-index: 1;
+    font-weight: bold;
+  }
+
+  .glyphicon {
+    top: 0px;
+    right: 15px;
+  }
+
+  .glyphicon-dot:before{
+      content: "\25cf";
+      font-size: 1em;
+      color: $red;
+  }
+  .glyphicon-dot.connected:before{
+      content: "\25cf";
+      font-size: 1em;
+      color: $green;
+  }
+}

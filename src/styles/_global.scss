@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+html {
+  font-size: 18px;
+  font-family: 'Roboto Mono', monospace !important;
+}
+
+a:hover {
+  text-decoration: none;
+}
+body {
+  font-family: 'Roboto Mono', monospace !important;
+  font-weight: 900;
+}
+html, body, #root, .App {
+  height: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}

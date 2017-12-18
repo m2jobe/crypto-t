@@ -1,0 +1,17 @@
+.buy.btn:focus, .buy.btn:hover {
+    background: $green;
+    border-color: black;
+    text-decoration: none;
+}
+
+.sell.btn:focus, .sell.btn:hover {
+    background: $red;
+    border-color: black;
+    text-decoration: none;
+}
+
+.order.btn:focus, .order.btn:hover {
+    background: #fff;
+    border-color: black;
+    text-decoration: none;
+}

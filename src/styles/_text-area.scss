@@ -1,0 +1,22 @@
+textarea {
+  padding-left: 10px;
+  padding-right: 10px;
+  resize: none;
+  width: 98%;
+  height: 97%;
+  font-family: 'Roboto Mono', 'Menlo', 'Ubuntu Mono', 'Monaco', 'Consolas', 'source-code-pro', 'monospace';
+  line-height: 1.21;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  color: #FFF;
+  background-color: #29353D;
+  overflow-y: hidden;
+  box-sizing: border-box;
+}
+textarea:focus {
+  overflow-y: scroll;
+}
+textarea:hover{
+  overflow-y: scroll;
+}

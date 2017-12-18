@@ -1,0 +1,34 @@
+.btn-chart {
+  height: 0;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+
+  // plus button
+  .btn-action.plus {
+    border-radius: 100%;
+    position: relative;
+    margin-left: 20px;
+    z-index: 1;
+    top: 75px;
+    // left: 6rem;
+    .highcharts-button-box {
+      z-index: 1;
+      border-radius: 100%
+    }
+  }
+
+  // minus button
+  .btn-action.minus {
+    border-radius: 100%;
+    position: relative;
+    margin-right: 20px;
+    z-index: 1;
+    top: 75px;
+    // right: 6rem;
+    .highcharts-button-box {
+      z-index: 1;
+      border-radius: 100%
+    }
+  }
+}

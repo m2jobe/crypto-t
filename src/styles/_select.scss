@@ -1,0 +1,15 @@
+.Select-control {
+  border-radius: 0px;
+}
+
+.Select-input {
+  height: $select-height;
+}
+
+.Select-control {
+  height: $select-height;
+}
+
+.Select-placeholder, .Select--single > .Select-control .Select-value {
+  line-height: 29px;
+}

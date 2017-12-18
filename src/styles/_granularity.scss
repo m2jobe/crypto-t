@@ -1,0 +1,14 @@
+.granularity {
+  label {
+    color: black;
+    border: 1px;
+    right: 10px;
+    top: 0.3rem;
+    color: $light-color
+  }
+  input {
+    height: 100%;
+    border: 1px solid $ligter-dark;
+    border-radius: 0px;
+  }
+}
