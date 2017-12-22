@@ -64,6 +64,14 @@ class Navigation extends Component {
           >
             Profile
           </NavLink>
+          <NavLink
+            className="btn vcenter"
+            exact
+            activeClassName="text-dark"
+            to="/calculator"
+          >
+            Calculator
+          </NavLink>
           {
             this.props.ticker.map(a => (
               <div className="ticker vcenter hide-md" key={a.name}>

@@ -45,10 +45,11 @@ export const getOrders = (product, session) => {
 }
 
 export const getAccounts = (session) => {
+  console.log(session);
   const uri = '/accounts';
   return authRequest(uri, '', 'get', '', session).then(res => (
     res.data
-  )).catch((err) => { toast.warn('Get accounts failed', err); });
+  )).catch((err) => { toast.warn('Get accounts failed: ' + err); if(err==="Error: Request failed with status code 401"){ toast.warn("Reset browser cache")} else {}   });
 };
 
 export const deleteOrder = (orderId, session) => {
@@ -56,14 +57,14 @@ export const deleteOrder = (orderId, session) => {
   return authRequest(uri, '', 'delete', '', session).then(res => {
     // toast.info('cancel order res', res);
     return res.data;
-  }).catch((err) => { toast.warn('Cancel order failed.', orderId, err); });
+  }).catch((err) => { toast.warn('Cancel order failed.'+ orderId + " " +err); });
 }
 
 export const getFills = (productId, session) => {
   const uri = `/fills?product_id=${productId}`;
   return authRequest(uri, '', 'get', '', session).then(res => (
     res.data
-  )).catch((err) => { toast.warn('Get fills failed', err); });
+  )).catch((err) => { toast.warn('Get fills failed ' + err); });
 }
 
 /*
